@@ -7,12 +7,13 @@ type ActionType = AddTagAT
 export const TagsReducer = (state: Array<string> = initialState, action: ActionType): Array<string> => {
     switch (action.type) {
         case 'ADD-TAG': {
+           const copyState = [...state]
             for (let i =0; i < action.tags.length; ++i){
-                if(action.tags[i].length > 0 && state.indexOf(action.tags[i]) === -1) {
-                    return [...state, action.tags[i]]
+                if(action.tags[i].length > 0 && copyState.indexOf(action.tags[i]) === -1) {
+                     copyState.push(action.tags[i])
                 }
             }
-            return state
+            return copyState
         }
         default:
             return state
